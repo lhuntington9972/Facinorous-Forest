@@ -7,19 +7,25 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody2D playerRigidBody;
     
-    private float movementSpeed;
+    public float movementSpeed;
     private float jumpDistance;
-    private bool isJumping;
+    private bool jumpReady;
     float moveHorizontal;
     float moveVertical;
+    //public GameObject platformCheck; 
     
     // Start is called before the first frame update
     void Start()
     {
         playerRigidBody = gameObject.GetComponent<Rigidbody2D>();
 
-        movementSpeed = 3;
-        jumpDistance = 60;
+        movementSpeed = 200f;
+        jumpDistance = 300f;
+        jumpReady = true;
+
+        //sprite = GetComponent<SpriteRenderer>();
+
+        
     }
 
     // Update is called once per frame
@@ -34,15 +40,25 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
 
+        /*if(moveHorizontal > 0.1f)
+        {
+            sprite.flipX = false;
+        } else if (moveHorizontal < -0.1f)
+        {
+            sprite.flipX = true;
+        }*/
+
         if(moveHorizontal > 0.1f || moveHorizontal < -0.1f)
         {
-            playerRigidBody.AddForce(new Vector2(moveHorizontal * movementSpeed, 0f), ForceMode2D.Impulse);
+            playerRigidBody.velocity = new Vector2(moveHorizontal * movementSpeed * Time.deltaTime, 0f);
         } 
 
-        if(!isJumping && moveVertical > 0.1f)
+        if(jumpReady == true && moveVertical > 0.1f)
         {
-            playerRigidBody.AddForce(new Vector2(0f, moveVertical * jumpDistance));
+            playerRigidBody.velocity = new Vector2(0f, moveVertical * jumpDistance * Time.deltaTime);
+            jumpReady = false;
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -50,13 +66,8 @@ public class PlayerMovement : MonoBehaviour
 
         if(collision.gameObject.tag == "Platform")
         {
-            isJumping = false;
+            jumpReady = true;
         }
-
-    }
-
-    void OnTriggerExit2D(Collider2D collision)
-    {
 
     }
 }
