@@ -6,7 +6,7 @@ public class NewBehaviourScript : MonoBehaviour
 {
 
     private float startPos;
-    private Camera;
+
 
 
     // Start is called before the first frame update
