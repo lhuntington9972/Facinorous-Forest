@@ -9,6 +9,6 @@ public class CameraMover : MonoBehaviour
 
     private void FixedUpdate()
     {
-        this.transform.position = new Vector3(playerLocation.position.x, playerLocation.position.y, -10f);
+        this.transform.position = new Vector3(playerLocation.position.x, playerLocation.position.y + 2.5f, -10f);
     }
 }
