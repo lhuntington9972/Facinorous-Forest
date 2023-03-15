@@ -14,6 +14,14 @@ bool jump = false;
 bool walk = false;
 bool sprint = false;
 
+private bool canDash = true;
+private bool isDashing;
+private float dashingPower = 24f;
+private float dashingTime = 0.2f;
+private float dashingCooldown = 1f;
+
+[SerializeField] private TrailRenderer tr;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -69,4 +77,10 @@ bool sprint = false;
         jump = false;
         
     }
+
+    private IEnumerator Dash()
+    {
+        canDash = false; 
+    }
+
 }
