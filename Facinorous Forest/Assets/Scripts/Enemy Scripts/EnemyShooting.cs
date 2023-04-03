@@ -17,38 +17,81 @@ public class EnemyShooting : MonoBehaviour
     {
         timeToShoot = 2f;
 
-        StartCoroutine(shoot());
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        if (shootingLeft == true)
+        {
+            StartCoroutine(shootLeft());
+        }
+        if (shootingRight == true)
+        {
+            StartCoroutine(shootRight());
+        }
+        if (shootingUp == true)
+        {
+            StartCoroutine(shootUp());
+        }
+        if (shootingDown == true)
+        {
+            StartCoroutine(shootDown());
+        }
+
+
     }
 
 
-    private IEnumerator shoot()
+    private IEnumerator shootLeft()
     {
         while (shootingLeft == true)
         {
-            yield return new WaitForSeconds(timeToShoot);
+            shootingLeft = false;
             Instantiate(projectile, this.transform.position, Quaternion.Euler(0f, 0f, 90f));
-        }
-        while (shootingRight == true)
-        {
             yield return new WaitForSeconds(timeToShoot);
-            Instantiate(projectile, this.transform.position, Quaternion.Euler(0f, 0f, 180f));
-        }
-        while (shootingUp == true)
-        {
-            yield return new WaitForSeconds(timeToShoot);
-            Instantiate(projectile, this.transform);
-        }
-        while (shootingDown == true)
-        {
-            yield return new WaitForSeconds(timeToShoot);
-            Instantiate(projectile, this.transform.position, Quaternion.Euler(0f, 0f, 90f));
+            shootingLeft = true; 
         }
 
     }
+
+    private IEnumerator shootRight()
+    {
+        while (shootingRight == true)
+        {
+            shootingRight = false; 
+            Instantiate(projectile, this.transform.position, Quaternion.Euler(0f, 0f, 270f));
+            yield return new WaitForSeconds(timeToShoot);
+            shootingRight = true;
+        }
+
+    }
+
+    private IEnumerator shootUp()
+    {
+        while (shootingUp == true)
+        {
+            shootingUp = false;
+            Instantiate(projectile, this.transform);
+            yield return new WaitForSeconds(timeToShoot);
+            shootingUp = true;
+        }
+
+    }
+
+
+    private IEnumerator shootDown()
+    {
+        while (shootingDown == true)
+        {
+            shootingDown = false;
+            Instantiate(projectile, this.transform.position, Quaternion.Euler(0f, 0f, 180f));
+            yield return new WaitForSeconds(timeToShoot);
+            shootingDown = true;
+        }
+
+    }
+    
 }
