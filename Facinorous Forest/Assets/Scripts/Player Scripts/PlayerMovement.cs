@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
 
 public CharacterController2D controller;
+public Animator animator; 
+
 
 float speedNum = 20f;
 public float speed;
@@ -31,6 +33,8 @@ private float dashingCooldown = 0.5f;
     // Update is called once per frame
     void Update()
     {
+
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
         if (isDashing)
         {
