@@ -7,6 +7,8 @@ public class CharacterHealth : MonoBehaviour
 
     public float playerHP;
 
+    public GameObject GameOver;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,7 @@ public class CharacterHealth : MonoBehaviour
     {
         if (playerHP <= 0f)
         {
+            GameOver.SetActive(true);
             Destroy(this);
             gameObject.SetActive(false);
         }
@@ -40,4 +43,6 @@ public class CharacterHealth : MonoBehaviour
             Debug.Log("you have " + playerHP + " HP left!");
         }
     }
+
+
 }
